@@ -8,7 +8,7 @@ public class Main {
 //		System.out.println(9220%17);
 		String temp;
 		
-		String s = "This is a test sentence, you can change it if you want.";
+		String s = "This is a test message, u can write your own";
 		String arr[]= s.split(" ");
 		int  alllist[] = new int[arr.length];
 		
@@ -18,7 +18,7 @@ public class Main {
 			alllist[i] = $temp.get_amount_of_loud_sounds();
 		}
 		int max=alllist[0];
-		for(int i =0;i<alllist.length;i++) {
+		for(int i =1;i<alllist.length;i++) {
 			if(alllist[i]>max) max = alllist[i];
 		}
 		for(int j = max;j>=1;j--) {
