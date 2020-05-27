@@ -1,0 +1,11 @@
+/home/anton/Documents/OOP_labs/Lab5/bin/Debug/netcoreapp3.1/Lab5
+/home/anton/Documents/OOP_labs/Lab5/bin/Debug/netcoreapp3.1/Lab5.deps.json
+/home/anton/Documents/OOP_labs/Lab5/bin/Debug/netcoreapp3.1/Lab5.runtimeconfig.json
+/home/anton/Documents/OOP_labs/Lab5/bin/Debug/netcoreapp3.1/Lab5.runtimeconfig.dev.json
+/home/anton/Documents/OOP_labs/Lab5/bin/Debug/netcoreapp3.1/Lab5.dll
+/home/anton/Documents/OOP_labs/Lab5/bin/Debug/netcoreapp3.1/Lab5.pdb
+/home/anton/Documents/OOP_labs/Lab5/obj/Debug/netcoreapp3.1/Lab5.csprojAssemblyReference.cache
+/home/anton/Documents/OOP_labs/Lab5/obj/Debug/netcoreapp3.1/Lab5.AssemblyInfoInputs.cache
+/home/anton/Documents/OOP_labs/Lab5/obj/Debug/netcoreapp3.1/Lab5.AssemblyInfo.cs
+/home/anton/Documents/OOP_labs/Lab5/obj/Debug/netcoreapp3.1/Lab5.dll
+/home/anton/Documents/OOP_labs/Lab5/obj/Debug/netcoreapp3.1/Lab5.pdb
