@@ -6,7 +6,7 @@ namespace classes
     class Sentence: Element
     {
         string[] arr;
-        Word[] word_arr;
+        private Word[] word_arr;
         private Element[] arr_sentence;
         public Sentence(Element[] arr_sentence)
         {
@@ -39,7 +39,7 @@ namespace classes
             {
                 if(arr_sentence[i].getType()=="word")
                 {
-                    word_arr[counter]=new Word(arr_sentence[i].getElement());
+                    word_arr[counter]=(Word)arr_sentence[i];
                     counter++;
                 }
             }

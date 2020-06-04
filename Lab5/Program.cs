@@ -54,12 +54,13 @@ namespace Lab5
         Console.WriteLine(sentence);
 
         Word[] arr = sentence.brake();
-        List<WordEditor> result_arr = new List<WordEditor>();
+
+        List<Word> arr2 = new List<Word>();
         for(int i=0;i<arr.Length-1;i++)
         {
-            result_arr.Add(new WordEditor(arr[i].toWordEditor()));
+            arr2.Add(arr[i]);
         }
-        List<WordEditor> sorted = result_arr.OrderBy(x => x.get_amount_of_loud_sounds()).ToList();
+        List<Word> sorted = arr2.OrderBy(x => x.get_amount_of_loud_sounds()).ToList();
         sorted.Reverse();
         foreach(var r in sorted)
         {

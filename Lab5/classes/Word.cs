@@ -6,25 +6,25 @@ namespace classes
     class Word: Element
     {
         private Letter[] arr_word; 
-        private string str_word;
+        private string str_word="";
+
+        private int amount_of_loud_sounds=0;
+        private char[] mass ={'e','y','u','i','o','a','E','Y','U','I','O','A'};
         public Word(Letter[] word)
         {
             arr_word = word;
-        }
-        public Word(string word)
-        {
-            str_word = word;
+
+            foreach (Letter l in arr_word)
+            {
+                str_word +=l.getElement();
+            }
         }
         
         public string getElement()
         {
-            string word="";
-            foreach (Letter l in arr_word)
-            {
-                word +=l.getElement();
-            }
-            return word;
+            return str_word;
         }
+
         public  override string ToString()
         {
                 return str_word;
@@ -33,9 +33,24 @@ namespace classes
         {
             return "word";
         }
-        public string toWordEditor()
+
+        public int get_amount_of_loud_sounds()
         {
-            return str_word;
+            // for(int i=0;i<arr_word.Length;i++)
+            // {
+            //     Console.WriteLine(arr_word[i].getElement());
+            // }
+            // return 1;
+            amount_of_loud_sounds=0;
+            foreach(var l in arr_word)
+            {
+                foreach(var m in mass)
+                {
+                    if(l.getLetter()==m) amount_of_loud_sounds++;
+                }
+            }
+            return amount_of_loud_sounds;
         }
+       
     }
 }

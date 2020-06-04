@@ -14,5 +14,9 @@ namespace classes
         {
             return ""+ letter;
         }
+        public char getLetter()
+        {
+            return letter;
+        }
     }
 }
