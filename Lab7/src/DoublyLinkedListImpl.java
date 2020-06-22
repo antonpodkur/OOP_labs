@@ -1,6 +1,6 @@
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedListImpl<E> {
+public class DoublyLinkedListImpl<E>{
 
     private Node head;
     private Node tail;

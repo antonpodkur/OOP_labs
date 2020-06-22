@@ -1,0 +1,478 @@
+import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
+
+public class DoublyLinkedListImpl<E> implements List<E>{
+
+    private Node head;
+    private Node tail;
+    private int size;
+
+
+    public DoublyLinkedListImpl() {
+        size = 0;
+    }
+    public DoublyLinkedListImpl(E value)
+    {
+        addLast(value);
+    }
+    public DoublyLinkedListImpl(E[] arr)
+    {
+        for (E value :arr) {
+            addFirst(value);
+        }
+    }
+
+    private class Node {
+        E element;
+        Node next;
+        Node prev;
+
+        public Node(E element, Node next, Node prev) {
+            this.element = element;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void addFirst(E element) {
+        Node tmp = new Node(element, head, null);
+        if (head != null) {
+            head.prev = tmp;
+        }
+        head = tmp;
+        if (tail == null) {
+            tail = tmp;
+        }
+        size++;
+        System.out.println("adding: " + element);
+    }
+
+    public void addLast(E element) {
+
+        Node tmp = new Node(element, null, tail);
+        if (tail != null) {
+            tail.next = tmp;
+        }
+        tail = tmp;
+        if (head == null) {
+            head = tmp;
+        }
+        size++;
+        System.out.println("adding: " + element);
+    }
+
+    public void iterateForward() {
+
+        System.out.println("iterating forward..");
+        Node tmp = head;
+        while (tmp != null) {
+            System.out.println(tmp.element);
+            tmp = tmp.next;
+        }
+    }
+
+    public void iterateBackward() {
+        System.out.println("iterating backward..");
+        Node tmp = tail;
+        while (tmp != null) {
+            System.out.println(tmp.element);
+            tmp = tmp.prev;
+        }
+    }
+
+
+    public E removeFirst() {
+        if (size == 0) throw new NoSuchElementException();
+        Node tmp = head;
+        head = head.next;
+        head.prev = null;
+        size--;
+        System.out.println("deleted: " + tmp.element);
+        return tmp.element;
+    }
+
+
+    public E removeLast() {
+        if (size == 0) throw new NoSuchElementException();
+        Node tmp = tail;
+        tail = tail.prev;
+        tail.next = null;
+        size--;
+        System.out.println("deleted: " + tmp.element);
+        return tmp.element;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        Node tmp = head;
+        while (tmp != null) {
+            if(tmp==o) return  true;
+            tmp = tmp.next;
+        }
+        return false;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        Node tmp = head;
+        int i =0;
+        while (tmp != null) {
+            i++;
+            tmp = tmp.next;
+        }
+        Object[] ans = new Object[i];
+        i=0;
+        while (tmp != null) {
+            ans[i]=tmp;
+            tmp = tmp.next;
+            i++;
+        }
+        return ans;
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return a;
+    }
+
+    @Override
+    public boolean add(E element) {
+        Node tmp = new Node(element, null, tail);
+        if (tail != null) {
+            tail.next = tmp;
+        }
+        tail = tmp;
+        if (head == null) {
+            head = tmp;
+        }
+        size++;
+        System.out.println("adding: " + element);
+        return true;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        Node tmp = head;
+        while (tmp != null) {
+            if(tmp==o)
+            {
+                if(tmp == head)
+                {
+                    removeFirst();
+                    return  true;
+                }
+                else if (tmp == tail)
+                {
+                    removeLast();
+                    return true;
+                }
+                else
+                {
+                    Node x = tmp.prev;
+                    Node y = tmp.next;
+                    x.next=y;
+                    y.prev =x;
+                    return true;
+                }
+            }
+            tmp = tmp.next;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        Object[] new_c =c.toArray();
+        for(int i=0;i<new_c.length;i++)
+        {
+            boolean tmp = contains(new_c[i]);
+            if(tmp == false)
+            {
+                return  false;
+            }
+        }
+        return  true;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        Object[] new_arr = c.toArray();
+        for(Object p: new_arr)
+        {
+            addLast((E)p);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        Object[] new_arr = c.toArray();
+        for(int i =index;i<new_arr.length;i++)
+        {
+            addLast((E)new_arr[i]);
+        }
+        return true;
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator<E> operator) {
+//        Node tmp = head;
+//        while (tmp != null) {
+//            if(tmp==operator)
+//            {
+//                if(tmp == head)
+//                {
+//                    removeFirst();
+//                }
+//                else if (tmp == tail)
+//                {
+//                    removeLast();
+//                }
+//                else
+//                {
+//                    Node x = tmp.prev;
+//                    Node y = tmp.next;
+//                    x.next=y;
+//                    y.prev =x;
+//                }
+//            }
+//            tmp = tmp.next;
+//        }
+    }
+
+    public void replacingAll(Object o) {
+        Node tmp = head;
+        while (tmp != null) {
+            if(tmp==o)
+            {
+                if(tmp == head)
+                {
+                    removeFirst();
+                }
+                else if (tmp == tail)
+                {
+                    removeLast();
+                }
+                else
+                {
+                    Node x = tmp.prev;
+                    Node y = tmp.next;
+                    x.next=y;
+                    y.prev =x;
+                }
+            }
+            tmp = tmp.next;
+        }
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        Object[] new_arr = c.toArray();
+        for(Object p: new_arr)
+        {
+            replacingAll(p);
+        }
+        return  true;
+    }
+//////From here ///////////////////////////////////////////////////////
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        Object[] new_arr = c.toArray();
+        for(Object p: new_arr)
+        {
+            addLast((E)p);
+        }
+        return true;
+    }
+
+    @Override
+    public void sort(Comparator<? super E> c) {
+
+    }
+
+    @Override
+    public Spliterator<E> spliterator() {
+        return null;
+    }
+
+    @Override
+    public void clear() {
+        Node tmp = tail;
+        while(tmp!=head)
+        {
+            tmp = tmp.next;
+            tmp.prev = null;
+        }
+        head = null;
+    }
+
+    @Override
+    public E get(int index) {
+        Node tmp = head;
+        int i =0;
+        while (tmp != null) {
+            if(i==index)
+            {
+                return  tmp.element;
+            }
+            tmp = tmp.next;
+            i++;
+        }
+        return null;
+    }
+
+    @Override
+    public E set(int index, E element) {
+        Node tmp = head;
+        int i=0;
+        while (tmp != null) {
+            if(i==index)
+            {
+               tmp.element = element;
+            }
+            tmp = tmp.next;
+            i++;
+        }
+        return null;
+    }
+
+    @Override
+    public void add(int index, E element) {
+        Node tmp = head;
+        Node new_node = new Node(element,null,null);
+        new_node.element = element;
+        int i =0;
+        while (tmp != null) {
+            if(i==index)
+            {
+                if(tmp == head)
+                {
+                    addFirst(element);
+                }
+                else if (tmp == tail)
+                {
+                    addLast(element);
+                }
+                else
+                {
+                    Node x = tmp.next;
+                    x.prev = new_node;
+                    tmp.next = new_node;
+                }
+            }
+            tmp = tmp.next;
+            i++;
+        }
+    }
+
+    @Override
+    public E remove(int index) {
+        Node tmp = head;
+        Node tmp2 = head;
+        int i =0;
+        while (tmp != null) {
+            if(i==index)
+            {
+                if(tmp == head)
+                {
+                    removeFirst();
+                    return tmp2.element;
+                }
+                else if (tmp == tail)
+                {
+                    tmp2 = tail;
+                    removeLast();
+                    return tmp2.element;
+                }
+                else
+                {
+                    Node x = tmp.prev;
+                    Node y = tmp.next;
+                    x.next=y;
+                    y.prev =x;
+                    return tmp.element;
+                }
+            }
+            tmp = tmp.next;
+            i++;
+        }
+        return null;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        Node tmp = head;
+        int i =0;
+        while (tmp != null) {
+            if(tmp==o)
+            {
+                return i;
+            }
+            tmp = tmp.next;
+            i++;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        Node tmp = head;
+        int i =0;
+        int res =-1;
+        while (tmp != null) {
+            if(tmp==o)
+            {
+                res= i;
+            }
+            tmp = tmp.next;
+            i++;
+        }
+        return res;
+    }
+
+    @Override
+    public ListIterator<E> listIterator() {
+        return null;
+    }
+
+    @Override
+    public ListIterator<E> listIterator(int index) {
+        return null;
+    }
+
+    @Override
+    public List<E> subList(int fromIndex, int toIndex) {
+        DoublyLinkedListImpl<E> inner = new DoublyLinkedListImpl<E>();
+
+        Node tmp = tail;
+        int i=0;
+        while (tmp != null) {
+            if((i>=fromIndex)&&(i<=toIndex))
+            {
+                inner.addLast(tmp.element);
+            }
+            tmp = tmp.prev;
+            i++;
+        }
+
+        return inner;
+    }
+}
